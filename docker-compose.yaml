@@ -1,5 +1,15 @@
 version: "3.8"
 services:
+  java-lb:
+    #image: java-lb
+    build:
+      context: .
+      dockerfile: ./java-lb/Dockerfile
+    container_name: java-lb
+    environment:
+      - LD_LIBRARY_PATH=/opt/opentelemetry-webserver-sdk/sdk_lib/lib
+    ports:
+      - "8082:8082"
   java:
     build:
       context: .

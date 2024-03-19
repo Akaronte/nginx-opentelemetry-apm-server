@@ -1,0 +1,56 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginx-java-balancer
+  namespace: myapp-test
+data:
+  nginx.conf: |
+    worker_processes auto;
+    pid /run/nginx.pid;
+    load_module /opt/opentelemetry-webserver-sdk/WebServerModule/Nginx/1.24.0/ngx_http_opentelemetry_module.so;
+    events {}
+    http {
+        include /etc/nginx/modules-enabled/*.conf;
+        upstream java-spring {
+            server myappjava.myapp-test.svc.cluster.local:8081;
+        }
+        server {
+            listen 8082;
+
+            location / {
+                proxy_pass http://java-spring;
+            }
+        }
+    }
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: opentelemetry-conf
+  namespace: myapp-test
+data:
+  opentelemetry_module.conf: |
+    NginxModuleEnabled ON;
+    NginxModuleOtelSpanExporter otlp;
+    NginxModuleOtelExporterEndpoint otel.myapp-test.svc.cluster.local:4317;
+    NginxModuleServiceName java-lb;
+    NginxModuleServiceNamespace MicroservicesMarchDemoArchitecture;
+    NginxModuleServiceInstanceId DemoInstanceId;
+    NginxModuleResolveBackends ON;
+    NginxModuleTraceAsError ON;
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: opentelemetry-conf.template
+  namespace: myapp-test
+data:
+  opentelemetry_module.conf: |
+    NginxModuleEnabled ON;
+    NginxModuleOtelSpanExporter otlp;
+    NginxModuleOtelExporterEndpoint otel.myapp-test.svc.cluster.local:4317;
+    NginxModuleServiceName java-lb;
+    NginxModuleServiceNamespace MicroservicesMarchDemoArchitecture;
+    NginxModuleServiceInstanceId ${HOSTNAME};
+    NginxModuleResolveBackends ON;
+    NginxModuleTraceAsError ON;

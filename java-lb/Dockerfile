@@ -11,3 +11,25 @@ ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/opentelemetry-webserver-sdk/sdk_lib/li
 
 COPY ./java-lb/opentelemetry_module.conf /etc/nginx/modules-enabled/opentelemetry_module.conf
 COPY ./java-lb/nginx.conf /etc/nginx/nginx.conf
+
+
+#FROM p09392rhel.azurecr.io/ing-rhel9
+# FROM redhat/ubi9:9.3-1552-source
+ 
+# ##############################################################
+# # Setup repositories
+# ##############################################################
+# # EPEL repository - libre2.so.9()(64bit)
+# RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+ 
+# # nginx with opentelemetry
+# COPY src/config/nginx.repo /etc/yum.repos.d/
+ 
+# # CentOS BaseOS  - libcares.so.2()(64bit)
+# COPY src/config/centos-baseos.repo /etc/yum.repos.d/
+ 
+# ##############################################################
+# # Update packages and install nginx with Open Telemetry module
+# ##############################################################
+# RUN yum -y update
+# RUN yum -y install nginx nginx-module-otel

@@ -15,5 +15,5 @@ COPY otel.properties /otel.properties
 
 EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "-Dotel.javaagent.configuration-file=/otel.properties","-javaagent:/opentelemetry-javaagent.jar","/app.jar"]
-#ENTRYPOINT ["java", "-jar","/app.jar"]
+#ENTRYPOINT java ${JAVA_OPTS}
 

@@ -21,3 +21,13 @@ services:
       - 8081:8081
     extra_hosts:
       - "apmserver-sample-apm-http:192.168.1.163"
+  collector:
+    container_name: collector
+    hostname: collector
+    image: otel/opentelemetry-collector:latest
+    command: ['--config=/etc/otel-collector-config.yaml']
+    volumes:
+      - ./ca.crt:/ca.crt
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    extra_hosts:
+      - "apmserver-sample-apm-http:192.168.1.163"

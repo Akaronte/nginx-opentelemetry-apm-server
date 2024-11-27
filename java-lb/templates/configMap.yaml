@@ -4,19 +4,26 @@ metadata:
   name: nginx-java-balancer
 data:
   nginx.conf: |
-    worker_processes auto;
-    pid /run/nginx.pid;
-    load_module /opt/opentelemetry-webserver-sdk/WebServerModule/Nginx/1.24.0/ngx_http_opentelemetry_module.so;
+    load_module modules/ngx_otel_module.so;
+
     events {}
+
     http {
-        include /etc/nginx/modules-enabled/*.conf;
-        upstream java-spring {
-            server myappjava.myappjava.svc.cluster.local:8081;
+        access_log  /var/log/nginx/access.log;
+        otel_service_name "java-lb";
+        otel_exporter {
+            endpoint collector:4317;
         }
+        upstream java-spring {
+            server java:8081;
+        }
+
         server {
             listen 8082;
 
             location / {
+                otel_trace         on;
+                otel_trace_context inject;
                 proxy_pass http://java-spring;
             }
         }

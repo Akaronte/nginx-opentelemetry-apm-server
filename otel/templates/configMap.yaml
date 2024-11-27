@@ -2,7 +2,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: otel-config
-  namespace: myapp-test
 data:
   config.yaml: |
     receivers:

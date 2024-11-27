@@ -2,7 +2,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: nginx-java-balancer
-  namespace: myapp-test
 data:
   nginx.conf: |
     worker_processes auto;
@@ -12,7 +11,7 @@ data:
     http {
         include /etc/nginx/modules-enabled/*.conf;
         upstream java-spring {
-            server myappjava.myapp-test.svc.cluster.local:8081;
+            server myappjava.myappjava.svc.cluster.local:8081;
         }
         server {
             listen 8082;
@@ -27,12 +26,11 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: opentelemetry-conf
-  namespace: myapp-test
 data:
   opentelemetry_module.conf: |
     NginxModuleEnabled ON;
     NginxModuleOtelSpanExporter otlp;
-    NginxModuleOtelExporterEndpoint otel.myapp-test.svc.cluster.local:4317;
+    NginxModuleOtelExporterEndpoint otel.myappjava.svc.cluster.local:4317;
     NginxModuleServiceName java-lb;
     NginxModuleServiceNamespace MicroservicesMarchDemoArchitecture;
     NginxModuleServiceInstanceId DemoInstanceId;
@@ -43,12 +41,11 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: opentelemetry-conf.template
-  namespace: myapp-test
 data:
   opentelemetry_module.conf: |
     NginxModuleEnabled ON;
     NginxModuleOtelSpanExporter otlp;
-    NginxModuleOtelExporterEndpoint otel.myapp-test.svc.cluster.local:4317;
+    NginxModuleOtelExporterEndpoint otel.myappjava.svc.cluster.local:4317;
     NginxModuleServiceName java-lb;
     NginxModuleServiceNamespace MicroservicesMarchDemoArchitecture;
     NginxModuleServiceInstanceId ${HOSTNAME};

@@ -20,7 +20,7 @@ exporters:
     endpoint: apmserver-sample-apm-http:8200 
     headers:
       # Elastic APM Server secret token
-      Authorization: "Bearer 3me781m7zmfFc79VdX6T2xQ6"
+      Authorization: "Bearer P15wqKM6QJ383uj9p1IbJD58"
     tls:
       #insecure: true
       #insecure_skip_verify: true

@@ -13,7 +13,7 @@ data:
     http {
         include /etc/nginx/modules-enabled/*.conf;
         upstream java-spring {
-            server myappjava.myapp-test.svc.cluster.local:8081;
+            server nginx-apm-myappjava.myappjava.svc.cluster.local:8081;
         }
         server {
             listen 8082;

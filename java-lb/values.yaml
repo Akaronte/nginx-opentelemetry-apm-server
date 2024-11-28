@@ -100,9 +100,10 @@ volumes:
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts: 
-# - name: nginx-java-balancer
-#   mountPath: "/etc/nginx/conf.d/"
-#   readOnly: true
+- name: nginx-java-balancer
+  mountPath: "/etc/nginx/nginx.conf"
+  subPath: nginx.conf
+  readOnly: true
 - name: opentelemetry-conf
   mountPath: "/etc/nginx/modules-enabled/"
   readOnly: true

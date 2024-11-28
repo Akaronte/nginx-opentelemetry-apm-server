@@ -1,0 +1,13 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: java
+spec:
+  host: java-myappjava.apps.kube2.okd.piensoluegoinstalo.com
+  to:
+    kind: Service
+    name: {{ include "new-chart.fullname" . }}
+    weight: 100
+  port:
+    targetPort: 8081
+  wildcardPolicy: None

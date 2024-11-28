@@ -6,7 +6,7 @@ spec:
   host: java-lb-myappjava.apps.kube2.okd.piensoluegoinstalo.com
   to:
     kind: Service
-    name: {{ include "new-chart.fullname" . }}
+    name: {{ include "java-lb.fullname" . }}
     weight: 100
   port:
     targetPort: 8082

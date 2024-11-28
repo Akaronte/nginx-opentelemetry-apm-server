@@ -4,7 +4,6 @@ metadata:
   name: nginx-java-balancer
 data:
   nginx.conf: |
-    load_module modules/ngx_otel_module.so;
 
     events {}
 

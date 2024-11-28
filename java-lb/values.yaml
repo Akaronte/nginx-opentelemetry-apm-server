@@ -104,9 +104,9 @@ volumeMounts:
   mountPath: "/etc/nginx/nginx.conf"
   subPath: nginx.conf
   readOnly: true
-- name: opentelemetry-conf
-  mountPath: "/etc/nginx/modules-enabled/"
-  readOnly: true
+# - name: opentelemetry-conf
+#   mountPath: "/etc/nginx/modules-enabled/"
+#   readOnly: true
 
 nodeSelector: {}
 

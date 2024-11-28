@@ -9,10 +9,7 @@ data:
 
     http {
         access_log  /var/log/nginx/access.log;
-        otel_service_name "java-lb";
-        otel_exporter {
-            endpoint collector:4317;
-        }
+
         upstream java-spring {
             server java:8081;
         }

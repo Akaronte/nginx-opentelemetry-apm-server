@@ -31,3 +31,14 @@ oc secrets link serviceaccount/java-lb regcred --for=pull,mount -n myappjava
 curl -u akaronte:mondariz10 -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
 "https://registry.piensoluegoinstalo.com:5000/v2/opentelemetry-collector/manifests/latest" \
 | grep Docker-Content-Digest
+
+
+curl -u akaronte:mondariz10 -X GET https://registry.piensoluegoinstalo.com:5000/v2/_catalog
+
+curl -u akaronte:mondariz10 -X GET https://registry.piensoluegoinstalo.com:5000/v2/javalb/manifests/latest
+
+
+curl -u akaronte:mondariz10 -X GET https://registry.piensoluegoinstalo.com:5000/v2/java-lb/manifests/latest
+
+
+curl -u akaronte:mondariz10 -X DELETE "https://registry.piensoluegoinstalo.com:5000/v2/opentelemetry-collector/manifests/<digest>"

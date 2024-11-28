@@ -102,6 +102,7 @@ volumes:
 volumeMounts: 
 - name: nginx-java-balancer
   mountPath: "/etc/nginx"
+  subPath: nginx.conf
   readOnly: true
 - name: opentelemetry-conf
   mountPath: "/etc/nginx/modules-enabled/"

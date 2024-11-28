@@ -25,3 +25,9 @@ oc secrets link serviceaccount/default regcred --for=pull,mount -n myappjava
 oc secrets link serviceaccount/otel regcred --for=pull,mount -n myappjava 
 
 oc secrets link serviceaccount/java-lb regcred --for=pull,mount -n myappjava 
+
+
+
+curl -u akaronte:mondariz10 -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
+"https://registry.piensoluegoinstalo.com:5000/v2/opentelemetry-collector/manifests/latest" \
+| grep Docker-Content-Digest
